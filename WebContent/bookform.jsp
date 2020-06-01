@@ -17,29 +17,29 @@
       
       <div class="header">
         <a href="${pageContext.request.contextPath}/" class="header-button">VIEW ALL</a>
-        <a href="${pageContext.request.contextPath}/add" class="header-button">ADD A BOOK</a> 
+        <a href="${pageContext.request.contextPath}/add" class="header-button">ADD A GAME</a> 
       </div>
     </div>
     <div>
-      <c:if test="${book != null}">
-        <h2>Edit Book</h2>
+      <c:if test="${game != null}">
+        <h2>Edit Game</h2>
         <form action="update" method="post">
-          <input type="hidden" name="id" value="<c:out value="${book.id}" />" />
+          <input type="hidden" name="id" value="<c:out value="${game.id}" />" />
           
           <label>
             Title
-            <input type="text" name="title" value="<c:out value="${book.title}" />" />
+            <input type="text" name="title" value="<c:out value="${game.title}" />" />
           </label>
           <label>
             Author
-            <input type="text" name="author" value="<c:out value="${book.author}" />" />
+            <input type="text" name="author" value="<c:out value="${game.author}" />" />
           </label>
           <label>
-            # of Copies
+            Number of Copies
             <select name="copies">
               <c:forEach begin="1" end="15" varStatus="loop">
                 <option value="${loop.index}"
-                  <c:if test="${book.copies == loop.index}">selected</c:if>
+                  <c:if test="${game.copies == loop.index}">selected</c:if>
                 >
                   ${loop.index}
                 </option>
@@ -52,8 +52,8 @@
           </div>
         </form>
       </c:if>
-      <c:if test="${book == null}">
-        <h2>Add Book</h2>
+      <c:if test="${game == null}">
+        <h2>Add Game</h2>
         <form action="insert" method="post">
           <input type="hidden" name="id" />
           <label>
@@ -65,7 +65,7 @@
             <input type="text" name="author" />
           </label>
           <label>
-            # of Copies
+            Number of Copies
             <input type="text" name="copies" />
           </label>
           <input type="submit" value="ADD" name="submit" class="add-button" />

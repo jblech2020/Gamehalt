@@ -9,13 +9,13 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookDAO
+public class GameDAO
 {
   private final String url;
   private final String username;
   private final String password;
   
-  public BookDAO(String url, String username, String password)
+  public GameDAO(String url, String username, String password)
   {
     super();
     
@@ -24,11 +24,11 @@ public class BookDAO
     this.password = password;
   }
   
-  public Book getBook(int id) throws SQLException
+  public Game getGame(int id) throws SQLException
   {
     final String sql = "SELECT * FROM books WHERE book_id = ?";
     
-    Book book = null;
+    Game game = null;
     Connection conn = getConnection();
     PreparedStatement pstmt = conn.prepareStatement(sql);
     
@@ -41,21 +41,21 @@ public class BookDAO
       int copies = rs.getInt("copies");
       int available = rs.getInt("available");
       
-      book = new Book(id, title, author, copies, available);
+      game = new Game(id, title, author, copies, available);
     }
     
     rs.close();
     pstmt.close();
     conn.close();
     
-    return book;
+    return game;
   }
   
-  public List<Book> getBooks() throws SQLException
+  public List<Game> getGames() throws SQLException
   {
     final String sql = "SELECT * FROM books ORDER BY book_id ASC";
     
-    List<Book> books = new ArrayList<>();
+    List<Game> games = new ArrayList<>();
     Connection conn = getConnection();
     Statement stmt = conn.createStatement();
     ResultSet rs = stmt.executeQuery(sql);
@@ -67,17 +67,17 @@ public class BookDAO
       int copies = rs.getInt("copies");
       int available = rs.getInt("available");
       
-      books.add(new Book(id, title, author, copies, available));
+      game.add(new Game(id, title, author, copies, available));
     }
     
     rs.close();
     stmt.close();
     conn.close();
     
-    return books;
+    return games;
   }
   
-  public boolean insertBook(String title, String author, int copies, int available)
+  public boolean insertGame(String title, String author, int copies, int available)
 		    throws SQLException
 		{
 		  final String sql = "INSERT INTO books (title, author, copies, available) " +
@@ -98,7 +98,7 @@ public class BookDAO
 		  return affected == 1;
 		}
   
-  public boolean updateBook(Book book) throws SQLException
+  public boolean updateGame(Game game) throws SQLException
   {
     final String sql = "UPDATE books SET title = ?, author = ?, copies = ?, available = ? " +
         "WHERE book_id = ?";
@@ -106,11 +106,11 @@ public class BookDAO
     Connection conn = getConnection();
     PreparedStatement pstmt = conn.prepareStatement(sql);
     
-    pstmt.setString(1, book.getTitle());
-    pstmt.setString(2, book.getAuthor());
-    pstmt.setInt(3, book.getCopies());
-    pstmt.setInt(4, book.getAvailable());
-    pstmt.setInt(5, book.getId());
+    pstmt.setString(1, game.getTitle());
+    pstmt.setString(2, game.getAuthor());
+    pstmt.setInt(3, game.getCopies());
+    pstmt.setInt(4, game.getAvailable());
+    pstmt.setInt(5, game.getId());
     int affected = pstmt.executeUpdate();
     
     pstmt.close();
@@ -119,14 +119,14 @@ public class BookDAO
     return affected == 1;
   }
   
-  public boolean deleteBook(Book book) throws SQLException
+  public boolean deleteGame(Game game) throws SQLException
   {
     final String sql = "DELETE FROM books WHERE book_id = ?";
     
     Connection conn = getConnection();
     PreparedStatement pstmt = conn.prepareStatement(sql);
     
-    pstmt.setInt(1, book.getId());
+    pstmt.setInt(1, game.getId());
     int affected = pstmt.executeUpdate();
     
     pstmt.close();

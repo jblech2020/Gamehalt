@@ -1,6 +1,6 @@
 package library;
 
-public class Book
+public class Game
 {  
   private int id;
   private String title;

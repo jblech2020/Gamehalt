@@ -24,7 +24,7 @@ public class Controller extends HttpServlet
     final String username = getServletContext().getInitParameter("JDBC-USERNAME");
     final String password = getServletContext().getInitParameter("JDBC-PASSWORD");
 
-    dao = new BookDAO(url, username, password);
+    dao = new GameDAO(url, username, password);
   }
   
   @Override
@@ -47,13 +47,13 @@ public class Controller extends HttpServlet
           showEditForm(request, response);
           break;
         case "/insert":
-          insertBook(request, response);
+          insertGame(request, response);
           break;
         case "/update":
-          updateBook(request, response);
+          updateGame(request, response);
           break;
         default:
-          viewBooks(request, response);
+          viewGames(request, response);
           break;
       }   
     } catch (SQLException e) {
@@ -61,14 +61,14 @@ public class Controller extends HttpServlet
     }
   }
 
-  private void insertBook(HttpServletRequest request, HttpServletResponse response)
+  private void insertGame(HttpServletRequest request, HttpServletResponse response)
       throws SQLException, ServletException, IOException
   {
     String title = request.getParameter("title");
     String author = request.getParameter("author");
     int copies = Integer.parseInt(request.getParameter("copies"));
   	
-    dao.insertBook(title, author, copies, copies);
+    dao.insertGame(title, author, copies, copies);
     response.sendRedirect(request.getContextPath() + "/");
   }
   
@@ -78,8 +78,8 @@ public class Controller extends HttpServlet
 		  try {
 		    final int id = Integer.parseInt(request.getParameter("id"));
 		    
-		    Book book = dao.getBook(id);
-		    request.setAttribute("book", book);
+		    Game game = dao.getGame(id);
+		    request.setAttribute("game", game);
 		  } finally {
 		    RequestDispatcher dispatcher = request.getRequestDispatcher("bookform.jsp");
 		    dispatcher.forward(request, response);
@@ -94,46 +94,46 @@ public class Controller extends HttpServlet
 		    : request.getParameter("submit").toLowerCase();
 		  final int id = Integer.parseInt(request.getParameter("id"));
 			
-		  Book book = dao.getBook(id);
+		  Game game = dao.getGame(id);
 		  switch (action) {
 		    case "rent":
-		      book.rentMe();
+		      game.rentMe();
 		      break;
 		    case "return":
-		      book.returnMe();
+		      game.returnMe();
 		      break;
 		    case "save":
 		      String title = request.getParameter("title");
 		      String author = request.getParameter("author");
 		      int copies = Integer.parseInt(request.getParameter("copies"));
-		      int available = book.getAvailable() + (copies - book.getCopies());
+		      int available = game.getAvailable() + (copies - game.getCopies());
 				
-		      book.setTitle(title);
-		      book.setAuthor(author);
-		      book.setCopies(copies);
-		      book.setAvailable(available);
+		      game.setTitle(title);
+		      game.setAuthor(author);
+		      game.setCopies(copies);
+		      game.setAvailable(available);
 		      break;
 		    case "delete":
-		      deleteBook(id, request, response);
+		      deleteGame(id, request, response);
 		      return;
 		    }
 
-		    dao.updateBook(book);
+		    dao.updateGame(game);
 		    response.sendRedirect(request.getContextPath() + "/");
 		  }
 		    
-		private void deleteBook(final int id, HttpServletRequest request, HttpServletResponse response)
+		private void deleteGame(final int id, HttpServletRequest request, HttpServletResponse response)
 		    throws SQLException, ServletException, IOException
 		{	
-		  dao.deleteBook(dao.getBook(id));	
+		  dao.deleteGame(dao.getGame(id));	
 		  response.sendRedirect(request.getContextPath() + "/");
 		}
   
-  private void viewBooks(HttpServletRequest request, HttpServletResponse response)
+  private void viewGames(HttpServletRequest request, HttpServletResponse response)
       throws SQLException, ServletException, IOException
   {
-    List<Book> books = dao.getBooks();
-    request.setAttribute("books", books);
+    List<Game> games = dao.getGames();
+    request.setAttribute("books", games);
     
     RequestDispatcher dispatcher = request.getRequestDispatcher("inventory.jsp");
     dispatcher.forward(request, response);

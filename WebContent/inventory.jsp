@@ -17,7 +17,7 @@
       
       <div class="header">
         <a href="${pageContext.request.contextPath}/" class="header-button">VIEW ALL</a>
-        <a href="${pageContext.request.contextPath}/add" class="header-button">ADD A BOOK</a> 
+        <a href="${pageContext.request.contextPath}/add" class="header-button">ADD A GAME</a> 
       </div>
     </div>
     <div>
@@ -29,25 +29,25 @@
           <th>Available</th>
           <th>Actions</th>
         </tr>
-        <c:forEach var="book" items="${books}">
+        <c:forEach var="book" items="${games}">
           <tr>
-            <td><c:out value="${book.title}" /></td>
-            <td><c:out value="${book.author}" /></td>
-            <td><c:out value="${book.copies}" /></td>
-            <td><c:out value="${book.available}" /></td>
+            <td><c:out value="${game.title}" /></td>
+            <td><c:out value="${game.author}" /></td>
+            <td><c:out value="${game.copies}" /></td>
+            <td><c:out value="${game.available}" /></td>
             <td>
 	      <div>
-	        <a href="${pageContext.request.contextPath}/update?action=rent&id=${book.id}"
+	        <a href="${pageContext.request.contextPath}/update?action=rent&id=${game.id}"
             	   class="button"
                 >
               	  RENT
               	</a>
-              	<a href="${pageContext.request.contextPath}/update?action=return&id=${book.id}"
+              	<a href="${pageContext.request.contextPath}/update?action=return&id=${game.id}"
               	   class="button"
               	>
               	  RETURN
               	</a>
-              	<a href="${pageContext.request.contextPath}/edit?id=${book.id}"
+              	<a href="${pageContext.request.contextPath}/edit?id=${game.id}"
               	   class="button"
               	>
               	  EDIT
