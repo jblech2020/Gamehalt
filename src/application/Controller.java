@@ -23,10 +23,6 @@ public class Controller extends HttpServlet
 	  final String url = getServletContext().getInitParameter("JDBC-URL");
 	  final String username = getServletContext().getInitParameter("JDBC-USERNAME");
 	  final String password = getServletContext().getInitParameter("JDBC-PASSWORD");
-	  
-	  //final String url = "jdbc:mysql://localhost:3306/library?serverTimezone=EST";
-	  //final String username = "root";
-	  //final String password = "password";
 
     dao = new GameDAO(url, username, password);
   }
@@ -137,7 +133,7 @@ public class Controller extends HttpServlet
       throws SQLException, ServletException, IOException
   {
     List<Game> games = dao.getGames();
-    request.setAttribute("book", games);
+    request.setAttribute("games", games);
     
     RequestDispatcher dispatcher = request.getRequestDispatcher("inventory.jsp");
     dispatcher.forward(request, response);
