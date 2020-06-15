@@ -10,19 +10,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import library.Book;
-import library.BookDAO;
+import library.Game;
+import library.GameDAO;
 
 public class Controller extends HttpServlet
 {
   private static final long serialVersionUID = 1L;
-  private BookDAO dao;
+  private GameDAO dao;
   
   public void init()
   {
-    final String url = getServletContext().getInitParameter("JDBC-URL");
-    final String username = getServletContext().getInitParameter("JDBC-USERNAME");
-    final String password = getServletContext().getInitParameter("JDBC-PASSWORD");
+	  final String url = getServletContext().getInitParameter("JDBC-URL");
+	  final String username = getServletContext().getInitParameter("JDBC-USERNAME");
+	  final String password = getServletContext().getInitParameter("JDBC-PASSWORD");
+	  
+	  //final String url = "jdbc:mysql://localhost:3306/library?serverTimezone=EST";
+	  //final String username = "root";
+	  //final String password = "password";
 
     dao = new GameDAO(url, username, password);
   }
@@ -86,7 +90,7 @@ public class Controller extends HttpServlet
 		  }
 		}
   
-  private void updateBook(HttpServletRequest request, HttpServletResponse response)
+  private void updateGame(HttpServletRequest request, HttpServletResponse response)
 		    throws SQLException, ServletException, IOException
 		{
 		  final String action = request.getParameter("action") != null
@@ -133,7 +137,7 @@ public class Controller extends HttpServlet
       throws SQLException, ServletException, IOException
   {
     List<Game> games = dao.getGames();
-    request.setAttribute("books", games);
+    request.setAttribute("book", games);
     
     RequestDispatcher dispatcher = request.getRequestDispatcher("inventory.jsp");
     dispatcher.forward(request, response);

@@ -6,7 +6,7 @@
   xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
   version="4.0"
 >
-  <display-name>GameHalt</display-name>
+  <display-name>Gamehalt</display-name>
 
   <context-param>
     <param-name>JDBC-URL</param-name>
@@ -18,7 +18,7 @@
   </context-param>
   <context-param>
     <param-name>JDBC-PASSWORD</param-name>
-    <param-value>Jaedan82602ROOT</param-value>
+    <param-value>password</param-value>
   </context-param>
 
   <servlet>

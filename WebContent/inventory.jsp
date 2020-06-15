@@ -5,7 +5,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>AIT Library</title>
+    <title>Gamehalt</title>
     
     <style type="text/css">
       <%@ include file="css/styles.css" %>
@@ -29,12 +29,12 @@
           <th>Available</th>
           <th>Actions</th>
         </tr>
-        <c:forEach var="book" items="${games}">
+        <c:forEach var="book" items="${books}">
           <tr>
-            <td><c:out value="${game.title}" /></td>
-            <td><c:out value="${game.author}" /></td>
-            <td><c:out value="${game.copies}" /></td>
-            <td><c:out value="${game.available}" /></td>
+            <td><c:out value="${book.title}" /></td>
+            <td><c:out value="${book.author}" /></td>
+            <td><c:out value="${book.copies}" /></td>
+            <td><c:out value="${book.available}" /></td>
             <td>
 	      <div>
 	        <a href="${pageContext.request.contextPath}/update?action=rent&id=${game.id}"

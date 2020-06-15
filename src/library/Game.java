@@ -8,7 +8,7 @@ public class Game
   private int copies;
   private int available;
     
-  public Book(int id, String title, String author, int copies, int available)
+  public Game(int id, String title, String author, int copies, int available)
   {
     super();
     

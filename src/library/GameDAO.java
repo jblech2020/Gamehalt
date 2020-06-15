@@ -67,7 +67,7 @@ public class GameDAO
       int copies = rs.getInt("copies");
       int available = rs.getInt("available");
       
-      game.add(new Game(id, title, author, copies, available));
+      games.add(new Game(id, title, author, copies, available));
     }
     
     rs.close();
