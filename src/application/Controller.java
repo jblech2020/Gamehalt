@@ -64,11 +64,18 @@ public class Controller extends HttpServlet
   private void insertGame(HttpServletRequest request, HttpServletResponse response)
       throws SQLException, ServletException, IOException
   {
-    String title = request.getParameter("title");
-    String author = request.getParameter("author");
-    int copies = Integer.parseInt(request.getParameter("copies"));
-  	
-    dao.insertGame(title, author, copies, copies);
+	  try  {
+		String title = request.getParameter("title");
+	    String author = request.getParameter("author");
+	    int copies = Integer.parseInt(request.getParameter("copies"));
+	    dao.insertGame(title, author, copies, copies);
+	  }catch (Exception e) {
+		  e.printStackTrace();
+	  }
+    
+    	
+    
+    
     response.sendRedirect(request.getContextPath() + "/");
   }
   

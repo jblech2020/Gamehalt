@@ -5,7 +5,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>myGamehalt</title>
+    <title>Gamehalt</title>
     
     <style type="text/css">
       <%@ include file="css/styles.css" %>
@@ -24,7 +24,7 @@
       <table border="1">        
         <tr>
           <th>Title</th>
-          <th>Author</th>
+          <th>Developer</th>
           <th>Copies</th>
           <th>Available</th>
           <th>Actions</th>

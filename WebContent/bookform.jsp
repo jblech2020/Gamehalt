@@ -31,7 +31,7 @@
             <input type="text" name="title" value="<c:out value="${game.title}" />" />
           </label>
           <label>
-            Author
+            Developer
             <input type="text" name="author" value="<c:out value="${game.author}" />" />
           </label>
           <label>
@@ -61,7 +61,7 @@
             <input type="text" name="title" />
           </label>
           <label>
-            Author
+            Developer
             <input type="text" name="author" />
           </label>
           <label>
